@@ -10,6 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tapView: UIView!
+    
+    
+    
+    
     @IBAction func tableButtonAction(_ sender: Any) {
         
         let collectionViewWidth = 120
@@ -21,6 +26,8 @@ class ViewController: UIViewController {
                
                 if self.collectionView.frame.size.height > 0{
                     self.collectionViewheigthConstraints.constant = 128
+                    self.backViewHeightConstraints.constant = 180
+
                 }
                 
                 self.tableViewWidthConstraints.constant = self.view.frame.size.width/2 // Some value
@@ -32,10 +39,14 @@ class ViewController: UIViewController {
                 
                 if self.collectionView.frame.size.height > 0{
                     self.collectionViewheigthConstraints.constant = 60
+                    self.backViewHeightConstraints.constant = 120
+
                     self.tableViewWidthConstraints.constant = 0 // Some value
 
                 }else{
                     self.collectionViewheigthConstraints.constant = 0
+                    self.backViewHeightConstraints.constant = 52
+
 
                     self.tableViewWidthConstraints.constant = 0 // Some value
                 }
@@ -51,9 +62,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UIView!
     
-    
-    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var collectionBackView: UIView!
+    
+    @IBOutlet weak var backViewHeightConstraints: NSLayoutConstraint!
     
     @IBOutlet weak var collectionViewheigthConstraints: NSLayoutConstraint!
     
@@ -71,6 +84,8 @@ class ViewController: UIViewController {
                 
                
                 self.collectionViewheigthConstraints.constant = 0
+                self.backViewHeightConstraints.constant = 52
+
                 self.view.layoutIfNeeded()
             })
             
@@ -81,9 +96,12 @@ class ViewController: UIViewController {
                     //self.collectionViewheigthConstraints.constant = 60
                     
                     self.collectionViewheigthConstraints.constant = 60
+                    self.backViewHeightConstraints.constant = 120
                     
                 }else{
                     self.collectionViewheigthConstraints.constant = 128
+                    self.backViewHeightConstraints.constant = 180
+
                 }
                 self.view.layoutIfNeeded()
             })
@@ -117,7 +135,7 @@ class ViewController: UIViewController {
 
 
 
-extension ViewController : UICollectionViewDataSource {
+extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     
     
     
@@ -128,8 +146,6 @@ extension ViewController : UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        
         return 6
     }
     
@@ -145,24 +161,50 @@ extension ViewController : UICollectionViewDataSource {
         
     }
     
+    
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellIdentifier",for:indexPath as IndexPath)
         
+        /*
+        let viewWidth = self.view.frame.size.width
+        let cViewWidth = self.collectionView.frame.size.width
+        
+        if (viewWidth < cViewWidth) {
+            
+            let FcellWidth = (viewWidth/3)-40
+            cell.frame = CGRect(x:cell.frame.origin.x, y:cell.frame.origin.y, width:FcellWidth, height:FcellWidth)
+
+        }else{
+            let FcellWidth = (viewWidth/6)-70
+            cell.frame = CGRect(x:cell.frame.origin.x, y:cell.frame.origin.y, width:FcellWidth, height:FcellWidth)
+        }
+        */
         
         cell.backgroundColor = getRandomColor()
-        
+       
         
         return cell
     }
     
     
-}
-
-
-// MARK:- UICollectionViewDelegate Methods
-
-extension ViewController : UICollectionViewDelegate {
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+         let FcellWidth = (self.view.frame.size.width/6)-70
+        
+        let totalCellWidth : CGFloat = FcellWidth * 6
+        let totalSpacingWidth : CGFloat = 5 * (6 - 1)
+        
+        let sub = CGFloat(totalCellWidth + totalSpacingWidth)
+        
+        let leftInset = ((self.view.frame.size.width) - sub) / 2
+        let rightInset = leftInset
+        
+        return UIEdgeInsetsMake(0, leftInset, 0, rightInset)
+    }
+   
+    
+/*
    
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -179,7 +221,12 @@ extension ViewController : UICollectionViewDelegate {
         
         return UIEdgeInsetsMake(0, leftInset, 0, rightInset)
     }
+ 
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width:40, height:40)
+    }
+    */
     
 //        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //            return UIEdgeInsetsMake(0,0,0,5)
@@ -198,9 +245,18 @@ extension ViewController : UICollectionViewDelegate {
     
     
     
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
-        
+        if (indexPath.row == 0)
+        {
+            tapView.isHidden = false
+            
+        }else{
+            tapView.isHidden = true
+        }
         
     }
     

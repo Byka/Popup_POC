@@ -10,8 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    
     @IBOutlet weak var tapView: UIView!
     
+    @IBOutlet weak var tapViewHeightConstraints: NSLayoutConstraint!
     
     
     
@@ -123,6 +126,12 @@ class ViewController: UIViewController {
         self.view.bringSubview(toFront: myview)
         */
         
+        
+        let width = (view.frame.width-20)/6
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,8 +145,9 @@ class ViewController: UIViewController {
 
 
 extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate {
+   
     
-    
+   
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         //retur1 mainContens.count
@@ -188,21 +198,27 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate 
     }
     
     
-    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-         let FcellWidth = (self.view.frame.size.width/6)-70
+        let CellWidth = (view.frame.width-20)/6
         
-        let totalCellWidth : CGFloat = FcellWidth * 6
-        let totalSpacingWidth : CGFloat = 5 * (6 - 1)
+        let totalCellWidth: CGFloat = CellWidth * 6
+        let totalSpacingWidth: CGFloat = 3 * (6 - 1)
         
-        let sub = CGFloat(totalCellWidth + totalSpacingWidth)
-        
-        let leftInset = ((self.view.frame.size.width) - sub) / 2
+        let leftInset = (self.collectionView.frame.size.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
         let rightInset = leftInset
         
         return UIEdgeInsetsMake(0, leftInset, 0, rightInset)
     }
+    
    
+   
+    
+    /*
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        return CGSize(width: 50.0, height: 50.0)
+    }
+    */
     
 /*
    
@@ -252,14 +268,31 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate 
         print(indexPath.row)
         if (indexPath.row == 0)
         {
-            tapView.isHidden = false
+            //tapView.isHidden = false
+            UIView.animate(withDuration: 1.5, animations: {
+
+            self.tapViewHeightConstraints.constant = 100
+            })
             
         }else{
-            tapView.isHidden = true
+            //tapView.isHidden = true
+            UIView.animate(withDuration: 1.5, animations: {
+                
+                self.tapViewHeightConstraints.constant = 0
+            })
+            
         }
+        
+        
         
     }
     
 
     
+  
 }
+
+
+
+
+

@@ -16,6 +16,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tapViewHeightConstraints: NSLayoutConstraint!
     
+    @IBAction func nextViewButtonAction(_ sender: Any) {
+        let actionVC = storyboard?.instantiateViewController(withIdentifier: "ActionViewController") as! ActionViewController
+        self.navigationController?.pushViewController(actionVC, animated: true)
+        
+        
+    }
     
     
     @IBAction func tableButtonAction(_ sender: Any) {
@@ -159,7 +165,14 @@ extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate 
         return 6
     }
     
-    func getRandomColor() -> UIColor{
+    
+
+    
+   
+    
+    
+    
+    func getRandomColor() -> UIColor {
         
         let randomRed:CGFloat = CGFloat(drand48())
         

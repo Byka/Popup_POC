@@ -162,6 +162,8 @@
                         <outlet property="backViewHeightConstraints" destination="fAC-3y-sHz" id="zqC-6H-sa7"/>
                         <outlet property="collectionBackView" destination="NEO-9Y-SJJ" id="C5j-bX-7DW"/>
                         <outlet property="collectionView" destination="fNP-Pi-iax" id="g61-BE-AA8"/>
+                        <outlet property="collectionViewLeadingSpaceConstraints" destination="oJ7-9D-EBF" id="9Iy-7F-A4b"/>
+                        <outlet property="collectionViewTrailingSpaceConstraints" destination="Lrb-Jz-bsn" id="Pnt-NA-GIJ"/>
                         <outlet property="collectionViewheigthConstraints" destination="F0i-eq-TFS" id="jAc-Lt-W4y"/>
                         <outlet property="tableView" destination="aJH-ja-2We" id="gbw-om-a8s"/>
                         <outlet property="tableViewWidthConstraints" destination="lQw-PC-dit" id="NCP-MY-UnN"/>
@@ -191,6 +193,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ltb-q5-MQ8">
+                                <rect key="frame" x="112" y="92" width="150" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.49803921569999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="SVO-Eh-pxw"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-BB-Pme">
                                 <rect key="frame" x="157" y="220" width="60" height="60"/>
                                 <constraints>
@@ -202,24 +214,40 @@
                                     <action selector="clickButtonAction:" destination="Wpa-gX-avs" eventType="touchUpInside" id="dbs-t8-r31"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5qS-8e-e6G">
+                                <rect key="frame" x="112" y="46" width="150" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.49803921569999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="2d5-UX-s3q"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wgw-BB-Pme" firstAttribute="top" secondItem="O9F-w6-dHE" secondAttribute="bottom" constant="50" id="624-DW-SRv"/>
                             <constraint firstItem="O9F-w6-dHE" firstAttribute="top" secondItem="SjF-yO-6Ey" secondAttribute="top" constant="120" id="DDA-vZ-R1v"/>
                             <constraint firstItem="O9F-w6-dHE" firstAttribute="centerX" secondItem="SjF-yO-6Ey" secondAttribute="centerX" id="HHN-pl-s86"/>
+                            <constraint firstItem="ltb-q5-MQ8" firstAttribute="centerX" secondItem="O9F-w6-dHE" secondAttribute="centerX" id="HcK-Ah-7aC"/>
+                            <constraint firstItem="O9F-w6-dHE" firstAttribute="top" secondItem="ltb-q5-MQ8" secondAttribute="bottom" constant="18" id="Oqh-hc-EBc"/>
                             <constraint firstItem="wgw-BB-Pme" firstAttribute="centerX" secondItem="O9F-w6-dHE" secondAttribute="centerX" id="T6P-tC-fWU"/>
+                            <constraint firstItem="ltb-q5-MQ8" firstAttribute="top" secondItem="5qS-8e-e6G" secondAttribute="bottom" constant="16" id="rRx-bj-Ldi"/>
+                            <constraint firstItem="5qS-8e-e6G" firstAttribute="centerX" secondItem="ltb-q5-MQ8" secondAttribute="centerX" id="w4z-FD-QQg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SjF-yO-6Ey"/>
                     </view>
                     <connections>
+                        <outlet property="addressTextField" destination="ltb-q5-MQ8" id="o1o-Uh-KpF"/>
                         <outlet property="clickButton" destination="wgw-BB-Pme" id="bxK-Gi-2Sl"/>
+                        <outlet property="nametextField" destination="5qS-8e-e6G" id="01X-xe-pfS"/>
                         <outlet property="sampleTextField" destination="O9F-w6-dHE" id="qE9-ju-Iue"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cV4-vQ-QAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="0.44977511244377816"/>
+            <point key="canvasLocation" x="1205.5999999999999" y="0.44977511244377816"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gmW-lp-AJO">
@@ -237,7 +265,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Th-wz-I4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116.8" y="0.89955022488755632"/>
+            <point key="canvasLocation" x="-308" y="1"/>
         </scene>
     </scenes>
 </document>

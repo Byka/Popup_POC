@@ -26,6 +26,11 @@ class ViewController: UIViewController {
     
     @IBAction func tableButtonAction(_ sender: Any) {
         
+
+
+        
+        
+        
         let collectionViewWidth = 120
         
         let tableWidth = tableView.frame.size.width
@@ -39,7 +44,7 @@ class ViewController: UIViewController {
 
                 }
                 
-                self.tableViewWidthConstraints.constant = self.view.frame.size.width/2 // Some value
+                self.tableViewWidthConstraints.constant = self.view.frame.size.width/3 // Some value
                 self.view.layoutIfNeeded()
             })
             
@@ -72,6 +77,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    
+    @IBOutlet weak var collectionViewTrailingSpaceConstraints: NSLayoutConstraint!
+    
+    @IBOutlet weak var collectionViewLeadingSpaceConstraints: NSLayoutConstraint!
+    
+    
     
     @IBOutlet weak var collectionBackView: UIView!
     

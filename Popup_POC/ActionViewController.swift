@@ -8,12 +8,32 @@
 
 import UIKit
 
-class ActionViewController: UIViewController {
+class ActionViewController: UIViewController, NSURLConnectionDelegate {
     @IBOutlet weak var sampleTextField: UITextField!
     
     @IBOutlet weak var clickButton: UIButton!
     
     @IBAction func clickButtonAction(_ sender: Any) {
+        
+//        if let name = nametextField.text {
+//            if let address = addressTextField.text {
+//                print("My name is \(name) and my address is \(address)")
+//            }
+//        }
+        
+        guard let name1 = nametextField.text, name1 != "" else{
+            print("No Name to print")
+            return
+        }
+        
+        guard let address1 = addressTextField.text, address1 != "" else {
+            print("No address to print")
+            return
+        }
+        print("My name is \(name1) and my address is \(address1)")
+        
+        
+        
         sampleTextField.text = ""
         totalTime = 5
         startTimer()
@@ -23,10 +43,20 @@ class ActionViewController: UIViewController {
     var totalTime = 5
     
     
+    
+    @IBOutlet weak var nametextField: UITextField!
+    
+    
+    @IBOutlet weak var addressTextField: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view.
+        connect(query: "http://www.google.com")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,9 +64,38 @@ class ActionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func connect(query:NSString) {
+
+        
+        
+        let urlLink: URL = URL(string: "https://codewithchris.com/tutorial-how-to-use-ios-nsurlconnection-by-example/")!
+       
+        let urlrequest: URLRequest = URLRequest(url: urlLink)
+        
+        let connection: NSURLConnection? = NSURLConnection(request: urlrequest, delegate: self, startImmediately: true)
+        connection?.start()
+        
+        
+        //var connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: false)
+
+        
+    }
+    
+    
+    func connection(didReceiveResponse: NSURLConnection!, didReceiveResponse response: URLResponse!) {
+        print("didReceiveResponse")
+    }
+    
+    func connection(connection: NSURLConnection!, didReceiveData conData: NSData!) {
+        print(conData)
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection!) {
+        print("Finish")
+    }
 
     
-    //MARK: Countdown Timer for auto dialing
+   
     /*******************************************
      NEED TO DISPLAY SECONDS AS COUTDOWN NUMBER
      *******************************************/
